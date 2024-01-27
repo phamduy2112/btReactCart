@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import CartItem from './CartItem'
 import GioHang from './GioHang';
 import Modal from './Modal';
+import Xemchitiet from './Xemchitiet';
 const sanPham=[
     { "maSP": 1, "tenSP": "VinSmart Live", "manHinh": "AMOLED, 6.2, Full HD+", "heDieuHanh": "Android 9.0 (Pie)", "cameraTruoc": "20 MP", "cameraSau": "Chính 48 MP & Phụ 8 MP, 5 MP", "ram": "4 GB", "rom": "64 GB", "giaBan": 5700000, "hinhAnh": "./img/vsphone.jpg" },
     { "maSP": 2, "tenSP": "Meizu 16Xs", "manHinh": "AMOLED, FHD+ 2232 x 1080 pixels", "heDieuHanh": "Android 9.0 (Pie); Flyme", "cameraTruoc": "20 MP", "cameraSau": "Chính 48 MP & Phụ 8 MP, 5 MP", "ram": "4 GB", "rom": "64 GB", "giaBan": 7600000, "hinhAnh": "./img/meizuphone.jpg" },
@@ -13,6 +14,7 @@ export default class PhoneShop extends Component {
 constructor(){
     super();
     this.state=({
+        product: sanPham[0],
         gioHang:[],
         modal:{
             title:'',
@@ -51,7 +53,7 @@ constructor(){
                      return sp.maSP==product.maSP
                 
                  });
-                 //    console.log(productE);
+                
                  if(productE){
                      productE.soLuong+=1;
              
@@ -133,16 +135,23 @@ constructor(){
         }
      
     }
+      // handle xem chi tiet 
+      handleXemChiTiet = (pd) => {
+        this.setState({
+          product: pd,
+        })
+    }
     //render sản phẩm
    renderProducts =()=>{
     return sanPham.map((item)=>{
   return (
   
-<CartItem data={item}  key={item.maSP} addProduct={this.addProduct} />
+<CartItem data={item}  key={item.maSP} addProduct={this.addProduct}  handleXemChiTiet={this.handleXemChiTiet}/>
   )
     
 })
     }
+  
     render() {
    
     return (
@@ -162,7 +171,7 @@ constructor(){
         
         />
       <div className='d-flex'>{this.renderProducts()}</div>
-        
+        <Xemchitiet product={this.state.product} />
         </div>
     )
   }

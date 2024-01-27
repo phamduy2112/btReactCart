@@ -11,6 +11,9 @@ export default class CartItem extends Component {
         {data.tenSP}
       </h5>
       <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <button className='btn btn-primary' onClick={() => {
+                this.props.handleXemChiTiet(data);
+              }}>Xem chi tiết</button>
         <button className='btn btn-primary' onClick={()=>{this.props.addProduct(data)}}>Thêm Giỏ Hàng</button>
     </div>
   </div>
